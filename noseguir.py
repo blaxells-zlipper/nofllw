@@ -10,7 +10,6 @@ SESSION_FILE = "session.json"
 
 cl = Client()
 
-# Intentar cargar sesión previa para evitar bloqueos por login
 if os.path.exists(SESSION_FILE):
     cl.load_settings(SESSION_FILE)
     print("Sesión cargada desde archivo.")
@@ -19,7 +18,6 @@ else:
     cl.login(USERNAME, PASSWORD)
     cl.dump_settings(SESSION_FILE)
 
-# Cargar la lista
 try:
     with open('lista_unfollow.txt', 'r', encoding='utf-8') as f:
         users_to_unfollow = [line.strip() for line in f.readlines() if line.strip()]
@@ -29,7 +27,6 @@ except FileNotFoundError:
 
 print(f"Total de personas a dejar de seguir: {len(users_to_unfollow)}")
 
-# Contador para control
 contador = 0
 
 for user in users_to_unfollow:
@@ -55,5 +52,6 @@ for user in users_to_unfollow:
             print("Instagram detectó actividad sospechosa. Deteniendo el script por seguridad.")
             break
         continue
+
 
 print("Proceso finalizado o detenido.")
